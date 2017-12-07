@@ -1,13 +1,18 @@
 package projectSuper.Main;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 
-public class GamePanel extends JPanel implements KeyListener, Runnable 
+
+public class GamePanel extends JPanel implements KeyListener,MouseListener, Runnable 
 {
 	/**Look into this
 	 * 
@@ -19,9 +24,13 @@ public class GamePanel extends JPanel implements KeyListener, Runnable
 	public int scale;
 	
 	private Thread thread;
+	private BufferedImage image;
+	private Graphics2D g;
+	
 	private boolean isRunning;
 	
 	private int FPS = 60;
+	private int targetTime = 10000/FPS;
 	
 	
 
@@ -50,24 +59,65 @@ public class GamePanel extends JPanel implements KeyListener, Runnable
 			thread.start();
 		}
 	}
+	
 
 	public void run() 
+	{
+		init();
+		
+		long start;
+		long elapsed;
+		long wait;
+		
+		while(isRunning)
+		{
+			start = System.nanoTime();
+			
+			update();
+			draw();
+			drawToScreen();
+			
+			elapsed = System.nanoTime() - start;
+			wait = targetTime - (elapsed / 100000);
+			
+			if(wait<0)
+				wait = targetTime;
+			try
+			{
+				Thread.sleep(wait);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public void init()
+	{
+		isRunning = true;
+		image = new BufferedImage(WIDTH,HEIGHT,1);
+		g = (Graphics2D) image.getGraphics();
+	}
+	
+	private void update()
 	{
 		
 	}
 	
-	public void draw()
+	private void draw()
 	{
 		
 	}
-	public void render()
+	private void drawToScreen()
 	{
+		Graphics g2 = getGraphics();
+		g2.drawImage(image,0,0,WIDTH,HEIGHT,null);
+		g2.dispose();
 		
 	}
-	public void update()
-	{
-		
-	}
+	
 	public void keyPressed(KeyEvent k) 
 	{
 
@@ -78,11 +128,35 @@ public class GamePanel extends JPanel implements KeyListener, Runnable
 	{
 
 	}
-
+	
 	public void keyTyped(KeyEvent k) 
 	{
 		
 	}
 
-	
+	public void mouseClicked(MouseEvent m) 
+	{
+
+	}
+
+
+	public void mouseEntered(MouseEvent m) 
+	{
+
+	}
+
+	public void mouseExited(MouseEvent m) 
+	{
+		
+	}
+
+	public void mousePressed(MouseEvent m)
+	{
+		
+	}
+
+	public void mouseReleased(MouseEvent m) 
+	{
+		
+	}
 }
