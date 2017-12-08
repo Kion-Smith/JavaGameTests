@@ -39,8 +39,9 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 		//change this later
 		//scale 1
 		scale =1;
-		height = 1920;
-		width = 1080;
+		height = 1280;//change back later
+		//maybe add if staments depending on aspect ration of current screen
+		width = height/16*9;
 		
 		setPreferredSize(new Dimension(height*scale,width*scale));// need to make this a variable that can be changed
 		requestFocus(true);
@@ -48,15 +49,38 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 		
 		
 	}
-	
+	// Maybe use the synchronized start and stop?
+	// This notation was used in the killer game programming book and in a few youtube tutorials, unsure of the difference between this and synchronized is
+	// read some where that maybe bad to use because it can create multiple addNotify()'s
+	/*
 	public void addNotify()
 	{
 		super.addNotify();
 		if(thread == null)
 		{
 			addKeyListener(this);
-			thread = new Thread(this);
+			thread = new Thread(this,"Project Super");
 			thread.start();
+		}
+	}*/
+	
+	public synchronized void start()
+	{
+		isRunning = true;
+		thread = new Thread(this,"GamePanel");
+		thread.start();
+	}
+	
+	public synchronized void stop()
+	{
+		try
+		{
+			thread.join();
+			isRunning = false;
+		}
+		catch(InterruptedException e)
+		{
+			e.printStackTrace();
 		}
 	}
 	
