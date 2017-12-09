@@ -10,9 +10,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import Graphics.Screen;
 
 
 
@@ -23,14 +26,16 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public int height;
-	public int width;
-	public int scale;
+	public int height = 1280;
+	public int width= height/16*9;
+	public int scale =1;
 	
 	private Thread thread;
-	private BufferedImage image;
 	private Graphics2D g;
 	private JFrame frame;
+	private BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
+	private Screen screen;
 	
 	private boolean isRunning;
 	
@@ -57,15 +62,9 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 
 	public GamePanel()
 	{
-		//change this later
-		//scale 1
-		scale =1;
-		height = 1280;//change back later
-		//maybe add if staments depending on aspect ration of current screen
-		width = height/16*9;
 		
 		setPreferredSize(new Dimension(height*scale,width*scale));// need to make this a variable that can be changed
-		
+		screen = new Screen(width,height);
 		
 		
 		//requestFocus(true);
