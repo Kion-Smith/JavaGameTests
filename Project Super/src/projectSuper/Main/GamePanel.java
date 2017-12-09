@@ -1,5 +1,6 @@
 package projectSuper.Main;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -7,7 +8,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
@@ -17,7 +21,7 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 	/**Look into this
 	 * 
 	 */
-	private static final long serialVersionUID = -5137492406301131554L;
+	private static final long serialVersionUID = 1L;
 	
 	public int height;
 	public int width;
@@ -26,12 +30,29 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 	private Thread thread;
 	private BufferedImage image;
 	private Graphics2D g;
+	private JFrame frame;
 	
 	private boolean isRunning;
 	
 	private int FPS = 60;
 	private int targetTime = 10000/FPS;
 	
+	public static void main(String[] args)
+	{
+		GamePanel g = new GamePanel();
+		g.frame = new JFrame("Project Super");
+		
+		g.frame.add(new GamePanel());
+		g.frame.setResizable(true);
+		
+		g.frame.setVisible(true);
+		
+		g.frame.pack();
+		g.frame.setLocationRelativeTo(null);
+		g.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		g.start();
+	}
 	
 
 	public GamePanel()
@@ -44,14 +65,19 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 		width = height/16*9;
 		
 		setPreferredSize(new Dimension(height*scale,width*scale));// need to make this a variable that can be changed
-		requestFocus(true);
-		setFocusable(true);
 		
+		
+		
+		//requestFocus(true);
+		//setFocusable(true);
+	//	new GamePanel();
 		
 	}
+	
 	// Maybe use the synchronized start and stop?
 	// This notation was used in the killer game programming book and in a few youtube tutorials, unsure of the difference between this and synchronized is
 	// read some where that maybe bad to use because it can create multiple addNotify()'s
+	
 	/*
 	public void addNotify()
 	{
@@ -67,7 +93,7 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 	public synchronized void start()
 	{
 		isRunning = true;
-		thread = new Thread(this,"GamePanel");
+		thread = new Thread(this);
 		thread.start();
 	}
 	
@@ -87,6 +113,7 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 
 	public void run() 
 	{
+		
 		init();
 		
 		long start;
@@ -95,11 +122,13 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 		
 		while(isRunning)
 		{
+			System.out.println("ran lo0op");
+			
 			start = System.nanoTime();
 			
 			update();
-			draw();
-			drawToScreen();
+			render();
+			//drawToScreen();  causing a null pointer within the thread for some reason?
 			
 			elapsed = System.nanoTime() - start;
 			wait = targetTime - (elapsed / 100000);
@@ -130,17 +159,25 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 		
 	}
 	
-	private void draw()
+	private void render()
 	{
+		BufferStrategy bs = frame.getBufferStrategy();
+		if(bs == null)
+		{
+			frame.createBufferStrategy(3);
+			return;
+		}
 		
-	}
-	private void drawToScreen()
-	{
-		Graphics g2 = getGraphics();
-		g2.drawImage(image,0,0,WIDTH,HEIGHT,null);
-		g2.dispose();
+		Graphics g = bs.getDrawGraphics();
 		
+		//do graphics
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
+		
+		g.dispose();
+		bs.show();
 	}
+
 	
 	public void keyPressed(KeyEvent k) 
 	{
