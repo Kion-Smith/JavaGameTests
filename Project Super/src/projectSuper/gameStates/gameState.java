@@ -1,5 +1,6 @@
 package projectSuper.gameStates;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 
@@ -15,6 +16,6 @@ public abstract class gameState
 	
 	public abstract void init();
 	public abstract void update();
-	public abstract void draw(Graphics2D g);
+	public abstract void draw(Graphics g);
 	public abstract void handleInput();
 }

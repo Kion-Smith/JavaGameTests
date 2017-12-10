@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Graphics.Screen;
+import projectSuper.gameStates.gameStateManager;
 
 
 
@@ -31,8 +32,9 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 	public int scale =1;
 	
 	private Thread thread;
-	private Graphics2D g;
+	
 	private JFrame frame;
+	private gameStateManager gsm;
 	private BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 	private Screen screen;
@@ -67,17 +69,20 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 		screen = new Screen(width,height);
 		
 		
-		//requestFocus(true);
-		//setFocusable(true);
-	//	new GamePanel();
+		/*
+			requestFocus(true);
+			setFocusable(true);
+			new GamePanel();
+		 */
 		
 	}
 	
+	/*
 	// Maybe use the synchronized start and stop?
 	// This notation was used in the killer game programming book and in a few youtube tutorials, unsure of the difference between this and synchronized is
 	// read some where that maybe bad to use because it can create multiple addNotify()'s
 	
-	/*
+	
 	public void addNotify()
 	{
 		super.addNotify();
@@ -127,7 +132,7 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 			
 			update();
 			render();
-			//drawToScreen();  causing a null pointer within the thread for some reason?
+			/* drawToScreen();  causing a null pointer within the thread for some reason? */
 			
 			elapsed = System.nanoTime() - start;
 			wait = targetTime - (elapsed / 100000);
@@ -150,12 +155,12 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 	{
 		isRunning = true;
 		image = new BufferedImage(WIDTH,HEIGHT,1);
-		g = (Graphics2D) image.getGraphics();
+		gsm = new gameStateManager();
 	}
 	
 	private void update()
 	{
-		
+		gsm.update();
 	}
 	
 	private void render()
@@ -170,8 +175,9 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 		Graphics g = bs.getDrawGraphics();
 		
 		//do graphics
-		g.setColor(Color.RED);
-		g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
+		//g.setColor(Color.RED);
+		//g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
+		gsm.draw(g);
 		
 		g.dispose();
 		bs.show();

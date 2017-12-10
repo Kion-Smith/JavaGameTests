@@ -1,6 +1,7 @@
 package projectSuper.gameStates;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics;
+
 
 
 public class gameStateManager 
@@ -13,10 +14,11 @@ public class gameStateManager
 		private int prevState;
 		
 		public static final int numStates = 4;
-		public static final int MENU = 0;
+		public static final int MAINMENU = 0;
 		public static final int PLAY = 1;
-		public static final int HELP = 2;
+		public static final int MENU = 2;
 		public static final int GAMEOVER = 3;
+		//add more as needed
 		
 		public gameStateManager()
 		{
@@ -24,7 +26,7 @@ public class gameStateManager
 			
 			gS = new gameState[numStates];
 			
-			setState(MENU);
+			setState(MAINMENU);
 		}
 		
 		public void setState(int i)
@@ -32,8 +34,26 @@ public class gameStateManager
 			prevState = curState;
 			unloadState(prevState);
 			curState = i;
-			
-			//add states
+			if(i == MAINMENU)
+			{
+				gS[i] = new mainMenuState(this);
+				gS[i].init();
+			}
+			else if(i == PLAY)
+			{
+				gS[i] = new playState(this);
+				gS[i].init();
+			}
+			else if( i == MENU)
+			{
+				gS[i] = new menuState(this);
+				gS[i].init();
+			}
+			else if (i== GAMEOVER)
+			{
+				gS[i] = new gameOverState(this);
+				gS[i].init();
+			}
 		}
 		
 		public void unloadState(int i)
@@ -53,13 +73,20 @@ public class gameStateManager
 			{
 				gS[curState].update();
 			}
-
+			else if(gS[curState] != null)
+			{
+				gS[curState].update();
+			}
 		}
 		
-		public void draw(Graphics2D g)
+		public void draw(Graphics g)
 		{
 
 			if(!paused)
+			{
+				gS[curState].draw(g);
+			}
+			else if(gS[curState] != null)
 			{
 				gS[curState].draw(g);
 			}
