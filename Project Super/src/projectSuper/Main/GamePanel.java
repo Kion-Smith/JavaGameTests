@@ -74,6 +74,7 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 			setFocusable(true);
 			new GamePanel();
 		 */
+		frame = new JFrame();
 		
 	}
 	
@@ -153,8 +154,8 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 	
 	public void init()
 	{
-		isRunning = true;
-		image = new BufferedImage(WIDTH,HEIGHT,1);
+		//isRunning = true;
+		//image = new BufferedImage(WIDTH,HEIGHT,1);
 		gsm = new gameStateManager();
 	}
 	
@@ -172,12 +173,26 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 			return;
 		}
 		
-		Graphics g = bs.getDrawGraphics();
+		screen.render();
 		
+		for(int i = 0;i<pixels.length;i++)
+		{
+			pixels[i]= screen.pixels[i];
+		}
+		
+		Graphics g = bs.getDrawGraphics();
 		//do graphics
+		
 		//g.setColor(Color.RED);
 		//g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
-		gsm.draw(g);
+		g.drawImage(image, 0, 0,frame.getWidth(), frame.getHeight(), null);
+		
+		
+		
+		
+		
+		
+		//gsm.draw(g);
 		
 		g.dispose();
 		bs.show();
