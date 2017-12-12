@@ -100,6 +100,7 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 		isRunning = true;
 		thread = new Thread(this);
 		thread.start();
+		
 	}
 	
 	public synchronized void stop()
@@ -121,19 +122,74 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 		
 		init();
 		
+		//Cherno's way of making a game loop
+		double ns = 1000000000.0 / FPS;
+		double delta = 0;
+		
+		int frames = 0;
+		int updates = 0;
+		
+		long lastTime = System.nanoTime();
+		long timer = System.currentTimeMillis();
+		
+	    while (isRunning) 
+	    {
+	    	long now = System.nanoTime();
+	    	
+	    	delta += (now - lastTime) / ns;//time taken from start of run and start of loop
+	    	lastTime = now;
+	    	
+	    	while(delta >= 1) //do stuff while delta is greater than or equal to 1
+	    	{
+	    		update();
+	    		updates++;
+	    		delta--;
+	    	}
+	    	//do frames after getting out of loop
+	        render();
+	        frames++;
+	        
+	        if(System.currentTimeMillis() - timer >= 1000) //ever 1 second print this
+	        {
+	        	frame.setTitle("Project Super" + "  |  " + updates + " ups, " + frames + " fps");
+	        	timer += 1000;
+	        	frames = 0;
+	        	updates = 0;
+	        }
+	        
+	        /* unsure of this sleep method, could be usefull later
+	        if (targetTime > delta) 
+	        {
+	            try 
+	            {
+	            	Thread.sleep(targetTime - ((long)delta) );
+	            } 
+	            catch (InterruptedException e) 
+	            {
+	            	e.printStackTrace();
+	            }
+	        }	        */
+	    }
+	        
+	    
+	    stop();//in case of unexpected break out from the loop
+		
+		/*
 		long start;
 		long elapsed;
 		long wait;
 		
 		while(isRunning)
 		{
+			
 			System.out.println("ran lo0op");
 			
 			start = System.nanoTime();
 			
 			update();
 			render();
-			/* drawToScreen();  causing a null pointer within the thread for some reason? */
+			
+			// drawToScreen();  causing a null pointer within the thread for some reason? 
 			
 			elapsed = System.nanoTime() - start;
 			wait = targetTime - (elapsed / 100000);
@@ -148,8 +204,12 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 			{
 				e.printStackTrace();
 			}
-		}
+			
+			
 		
+			
+		}
+		*/
 	}
 	
 	public void init()
@@ -173,6 +233,7 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 			return;
 		}
 		
+		screen.clear();
 		screen.render();
 		
 		for(int i = 0;i<pixels.length;i++)
@@ -185,14 +246,16 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 		
 		//g.setColor(Color.RED);
 		//g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
+		
+
 		g.drawImage(image, 0, 0,frame.getWidth(), frame.getHeight(), null);
+
 		
 		
 		
 		
 		
-		
-		//gsm.draw(g);
+		//gsm.draw(g);// enable later
 		
 		g.dispose();
 		bs.show();
