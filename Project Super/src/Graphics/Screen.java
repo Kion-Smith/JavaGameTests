@@ -17,7 +17,7 @@ public class Screen
 		width = w;
 		height =h;
 		
-		pixels = new int[width * height]; // all pixels on the screen
+		pixels = new int[width * height]; // all pixels on the screen 921,600
 		
 		for(int i =0;i<64*64;i++)
 		{
@@ -30,9 +30,13 @@ public class Screen
 		
 		for(int i =0;i<height;i++) // going to loop through the cols
 		{
+			int y =i;
+			
 			for(int j = 0;j<width;j++) //looping through the row at the col
 			{
-				int tileIndex = (j/32)+(i/32) *64;
+				int x =j;
+				int tileIndex = ((x>>4)&63)+((y>>4)&63) * 64; // same as (j||i) /16 by use of bitwise operators
+				//System.out.println(tiles[tileIndex]);
 				pixels[j + i* width] =  tiles[tileIndex];// because this is single dimension array so looks for position needs to offset by the width
 			}
 		}

@@ -27,8 +27,8 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public int height = 1280;
-	public int width= height/16*9;
+	public int width = 1280;
+	public int height= width/16*9;
 	public int scale =1;
 	
 	private Thread thread;
@@ -65,7 +65,7 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 	public GamePanel()
 	{
 		
-		setPreferredSize(new Dimension(height*scale,width*scale));// need to make this a variable that can be changed
+		setPreferredSize(new Dimension(width*scale,height*scale));// need to make this a variable that can be changed
 		screen = new Screen(width,height);
 		
 		
@@ -74,7 +74,7 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 			setFocusable(true);
 			new GamePanel();
 		 */
-		frame = new JFrame();
+
 		
 	}
 	
