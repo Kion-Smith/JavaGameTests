@@ -226,8 +226,23 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 	{
 		//gsm.update();
 		keyHandler.update();
-		x++;
-		//y++;
+		if(keyHandler.isPressed(keyHandler.UP))
+		{
+			y--;
+		}
+		if(keyHandler.isPressed(keyHandler.DOWN))
+		{
+			y++;
+		}
+		if(keyHandler.isPressed(keyHandler.LEFT))
+		{
+			x--;
+		}
+		if(keyHandler.isPressed(keyHandler.RIGHT))
+		{
+			x++;
+		}
+	
 	}
 	
 	private void render()

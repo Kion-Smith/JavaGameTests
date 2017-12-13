@@ -58,7 +58,7 @@ public class keyHandler
 		public static boolean isPressed(int i) 
 		{
 		//	return keyState[i] && !prevKeyState[i];
-			if(keyState[i] && !prevKeyState[i])
+			if(keyState[i] )
 			{
 				return true;
 			}
