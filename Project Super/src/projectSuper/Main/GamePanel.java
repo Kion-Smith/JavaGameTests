@@ -1,9 +1,7 @@
 package projectSuper.Main;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -42,7 +40,7 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 	private boolean isRunning;
 	
 	private int FPS = 60;
-	private int targetTime = 10000/FPS;
+	//private int targetTime = 10000/FPS;
 	
 	public static void main(String[] args)
 	{
@@ -218,10 +216,13 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 		//image = new BufferedImage(WIDTH,HEIGHT,1);
 		gsm = new gameStateManager();
 	}
-	
+	int x =0;
+	int y = 0;
 	private void update()
 	{
 		gsm.update();
+		x++;
+		//y++;
 	}
 	
 	private void render()
@@ -234,7 +235,7 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 		}
 		
 		screen.clear();
-		screen.render();
+		screen.render(x,y);
 		
 		for(int i = 0;i<pixels.length;i++)
 		{
