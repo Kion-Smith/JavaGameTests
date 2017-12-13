@@ -27,8 +27,9 @@ public class mainMenuState extends gameState
 
 	public void draw(Graphics g) 
 	{
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 1920,1080);
+		//g.setColor(Color.BLACK);
+		//g.fillRect(0, 0, 1920,1080);
+		
 		
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Ariel",Font.BOLD,30));
