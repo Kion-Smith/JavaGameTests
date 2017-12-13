@@ -15,10 +15,11 @@ import javax.swing.JPanel;
 
 import Graphics.Screen;
 import projectSuper.gameStates.gameStateManager;
+import projectSuper.input.keyHandler;
 
 
 
-public class GamePanel extends JPanel implements KeyListener,MouseListener, Runnable 
+public class GamePanel extends JPanel implements KeyListener, MouseListener, Runnable 
 {
 	/**Look into this
 	 * 
@@ -36,7 +37,7 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 	private BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 	private Screen screen;
-	
+	private keyHandler key;
 	private boolean isRunning;
 	
 	private int FPS = 60;
@@ -67,13 +68,14 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 		screen = new Screen(width,height);
 		
 		
-		/*
+		
 			requestFocus(true);
 			setFocusable(true);
-			new GamePanel();
+			addKeyListener(this);
+		/*	new GamePanel();
 		 */
-
-		
+			//frame = new JFrame();
+			//frame.addKeyListener(key);
 	}
 	
 	/*
@@ -97,7 +99,9 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 	{
 		isRunning = true;
 		thread = new Thread(this);
+		
 		thread.start();
+	
 		
 	}
 	
@@ -220,7 +224,8 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 	int y = 0;
 	private void update()
 	{
-		gsm.update();
+		//gsm.update();
+		keyHandler.update();
 		x++;
 		//y++;
 	}
@@ -262,15 +267,16 @@ public class GamePanel extends JPanel implements KeyListener,MouseListener, Runn
 		bs.show();
 	}
 
-	
 	public void keyPressed(KeyEvent k) 
 	{
-
+		keyHandler.keySet(k.getKeyCode(),true);
+		System.out.println("ran");
 	}
 
 	
 	public void keyReleased(KeyEvent k) 
 	{
+		keyHandler.keySet(k.getKeyCode(),false);
 
 	}
 	
