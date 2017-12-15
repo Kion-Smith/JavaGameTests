@@ -37,7 +37,8 @@ public class Screen
 			{
 				int x =j+xOffset;
 				int tileIndex = ((x>>4)&MAPSIZEMASK)+((y>>4)&MAPSIZEMASK) * MAPSIZE; // same as (j||i) /16 by use of bitwise operators
-				pixels[j + i* width] =  tiles[tileIndex];// because this is single dimension array so looks for position needs to offset by the width
+				//pixels[j + i* width] =  tiles[tileIndex];// because this is single dimension array so looks for position needs to offset by the width
+				pixels[j + i* width] =  Sprite.ground1.pixels[(j&15)+(i&15)*Sprite.ground1.SIZE];
 			}
 		}
 
