@@ -1,4 +1,4 @@
-package Graphics;
+package projectSuper.graphics;
 
 import java.util.Random;
 
@@ -37,7 +37,6 @@ public class Screen
 			{
 				int x =j+xOffset;
 				int tileIndex = ((x>>4)&MAPSIZEMASK)+((y>>4)&MAPSIZEMASK) * MAPSIZE; // same as (j||i) /16 by use of bitwise operators
-				//System.out.println(tiles[tileIndex]);
 				pixels[j + i* width] =  tiles[tileIndex];// because this is single dimension array so looks for position needs to offset by the width
 			}
 		}

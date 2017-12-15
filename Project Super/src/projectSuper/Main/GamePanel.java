@@ -13,8 +13,8 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import Graphics.Screen;
 import projectSuper.gameStates.gameStateManager;
+import projectSuper.graphics.Screen;
 import projectSuper.input.keyHandler;
 
 
@@ -276,7 +276,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 		
 		
 		
-		//gsm.draw(g);// enable later
+		//gsm.draw(g);// enable later maybe also use bufferedimage ashwell as g, maybe not
 		
 		g.dispose();
 		bs.show();
