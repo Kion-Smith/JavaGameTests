@@ -1,7 +1,7 @@
 package projectSuper.level;
 
 import projectSuper.graphics.Screen;
-
+//change to public abstract
 public class Level 
 {
 	private int width,height;
