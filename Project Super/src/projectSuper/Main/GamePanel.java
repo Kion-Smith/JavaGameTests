@@ -76,7 +76,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 			setFocusable(true);
 			addKeyListener(this);
 			
-			level = new RandomLevel(64,64);
+			level = new RandomLevel(1980,1080);//random test numbers for map size
 			
 		/*	new GamePanel();
 		 */
@@ -234,19 +234,19 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 		keyHandler.update();
 		if(keyHandler.isPressed(keyHandler.UP))
 		{
-			y++;
+			y--;
 		}
 		if(keyHandler.isPressed(keyHandler.DOWN))
 		{
-			y--;
+			y++;
 		}
 		if(keyHandler.isPressed(keyHandler.LEFT))
 		{
-			x++;
+			x--;
 		}
 		if(keyHandler.isPressed(keyHandler.RIGHT))
 		{
-			x--;
+			x++;
 		}
 	
 	}

@@ -67,7 +67,7 @@ public class Screen
 			{
 				int xa = j+xPos;
 				
-				if(xa<0 || xa>= width || ya<0 || ya>= width)//prevent using up resources and index out of bounds
+				if(xa<0 || xa>= width || ya<0 || ya>= height)//prevent using up resources and index out of bounds
 				{
 					break;
 				}

@@ -9,7 +9,7 @@ public class Sprite
 	private spriteSheet sheet;
 	
 	public static Sprite ground1 = new Sprite(16,0,0,spriteSheet.tiles);
-	public static Sprite voidSprite = new Sprite(16,0);//use the hex
+	public static Sprite voidSprite = new Sprite(16,0x4286f4);//use the hex
 	
 	public Sprite(int size,int col,int row,spriteSheet s)
 	{
@@ -34,7 +34,7 @@ public class Sprite
 		{
 			for(int j =0;j<SIZE;j++)
 			{
-				pixels[j+i*SIZE] = sheet.pixels[(i+x)+ (j+y)*sheet.SIZE];
+				pixels[j+i*SIZE] = sheet.pixels[(j+x)+ (i+y)*sheet.SIZE];
 			}
 		}
 	}
