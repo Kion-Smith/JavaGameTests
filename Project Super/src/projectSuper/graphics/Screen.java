@@ -2,6 +2,8 @@ package projectSuper.graphics;
 
 import java.util.Random;
 
+import projectSuper.level.tiles.Tile;
+
 //pixel manipulation class
 public class Screen 
 {
@@ -49,6 +51,27 @@ public class Screen
 			}
 		}
 
+	}
+	//only works for squares might want to change later
+	public void renderTiles(int xPos,int yPos,Tile tile)
+	{
+		for(int i=0;i<tile.sprite.SIZE;i++)
+		{
+			int ya = i+yPos;
+			
+			for(int j=0;j<tile.sprite.SIZE;j++)
+			{
+				int xa = j+xPos;
+				
+				if(xa<0 || xa>= width || ya<0 || ya>= width)//prevent using up resources and index out of bounds
+				{
+					break;
+				}
+				
+				pixels[xa+ya*width] = tile.sprite.pixels[j+i*tile.sprite.SIZE];
+			}
+			
+		}
 	}
 	
 	public void clear()
