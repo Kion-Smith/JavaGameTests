@@ -16,6 +16,8 @@ import javax.swing.JPanel;
 import projectSuper.gameStates.gameStateManager;
 import projectSuper.graphics.Screen;
 import projectSuper.input.keyHandler;
+import projectSuper.level.Level;
+import projectSuper.level.RandomLevel;
 
 
 
@@ -34,6 +36,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 	
 	private JFrame frame;
 	private gameStateManager gsm;
+	private Level level;//add this to the gsm play state later
 	private BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 	private Screen screen;
@@ -72,6 +75,9 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 			requestFocus(true);
 			setFocusable(true);
 			addKeyListener(this);
+			
+			level = new RandomLevel(64,64);
+			
 		/*	new GamePanel();
 		 */
 			//frame = new JFrame();
@@ -255,7 +261,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 		}
 		
 		screen.clear();
-		screen.render(x,y);
+		level.render(x, y, screen);
 		
 		for(int i = 0;i<pixels.length;i++)
 		{

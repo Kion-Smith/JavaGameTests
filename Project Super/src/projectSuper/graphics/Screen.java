@@ -14,6 +14,8 @@ public class Screen
 	public int[] tiles = new int[MAPSIZE*MAPSIZE];
 	private Random random = new Random();
 	
+	public int xOffset,yOffset;
+	
 	
 	public Screen(int w,int h)
 	{
@@ -27,7 +29,7 @@ public class Screen
 			tiles[i] = random.nextInt(0xffffff);
 		}
 	}
-	
+	/*
 	public void render(int xOffset,int yOffset)
 	{
 		
@@ -51,10 +53,12 @@ public class Screen
 			}
 		}
 
-	}
+	}*/
 	//only works for squares might want to change later
 	public void renderTiles(int xPos,int yPos,Tile tile)
 	{
+		xPos -= xOffset;
+		yPos -= yOffset;
 		for(int i=0;i<tile.sprite.SIZE;i++)
 		{
 			int ya = i+yPos;
@@ -74,6 +78,12 @@ public class Screen
 		}
 	}
 	
+	public void setOffset(int xOff,int yOff)
+	{
+		xOffset = xOff;
+		yOffset = yOff;
+	}
+	
 	public void clear()
 	{
 		for(int i =0;i<pixels.length;i++)
@@ -81,4 +91,5 @@ public class Screen
 			pixels[i] = 0;
 		}
 	}
+	
 }

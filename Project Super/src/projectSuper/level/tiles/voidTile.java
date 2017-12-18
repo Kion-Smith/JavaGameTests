@@ -14,7 +14,7 @@ public class voidTile extends Tile
 	
 	public void render(int locX,int locY,Screen s)
 	{
-		s.renderTiles(locX,locY,this);
+		s.renderTiles(locX<<4,locY<<4,this);//convert back to titles
 	}
 
 }
