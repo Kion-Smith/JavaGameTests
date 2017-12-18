@@ -9,6 +9,7 @@ public class Sprite
 	private spriteSheet sheet;
 	
 	public static Sprite ground1 = new Sprite(16,0,0,spriteSheet.tiles);
+	public static Sprite voidSprite = new Sprite(16,0);//use the hex
 	
 	public Sprite(int size,int col,int row,spriteSheet s)
 	{
@@ -19,6 +20,13 @@ public class Sprite
 		sheet = s;
 		load();
 	}
+	//for void tiles
+	public Sprite(int size,int color)
+	{
+		SIZE = size;
+		pixels = new int[SIZE*SIZE];
+		setColor(color);
+	}
 	
 	private void load()
 	{
@@ -28,6 +36,14 @@ public class Sprite
 			{
 				pixels[j+i*SIZE] = sheet.pixels[(i+x)+ (j+y)*sheet.SIZE];
 			}
+		}
+	}
+	
+	public void setColor(int color)
+	{
+		for(int i =0;i<SIZE*SIZE;i++)
+		{
+			pixels[i]= color;
 		}
 	}
 }

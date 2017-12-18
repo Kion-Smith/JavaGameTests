@@ -8,8 +8,8 @@ public class Tile
 	public int x, y;
 	public Sprite sprite;
 	
-	public static Tile ground = new ground1Tile(Sprite.ground1);//only one object
-	
+	public static Tile ground1 = new ground1Tile(Sprite.ground1);//only one object
+	public static Tile voidTile = new voidTile(Sprite.voidSprite);
 	
 	public Tile(Sprite s) 
 	{

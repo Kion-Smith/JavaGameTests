@@ -7,7 +7,7 @@ import projectSuper.level.tiles.Tile;
 //pixel manipulation class
 public class Screen 
 {
-	private int width,height; //size of screen
+	public int width,height; //size of screen
 	public int[] pixels; //array for pixels on screen, single array because its faster than using a 2d array
 	public final int MAPSIZE = 64;
 	public final int MAPSIZEMASK = MAPSIZE-1;
