@@ -67,11 +67,16 @@ public class Screen
 			{
 				int xa = j+xPos;
 				
-				if(xa<0 || xa>= width || ya<0 || ya>= height)//prevent using up resources and index out of bounds
+				if(xa<-tile.sprite.SIZE || xa>= width || ya<0 || ya>= height)//prevent using up resources and index out of bounds
 				{
 					break;
+					
 				}
-				
+
+				if(xa< 0)
+				{
+					xa =0;
+				}
 				pixels[xa+ya*width] = tile.sprite.pixels[j+i*tile.sprite.SIZE];
 			}
 			

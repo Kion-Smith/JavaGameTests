@@ -45,10 +45,10 @@ public class Level
 		//pinned corners to define the regions being render to screen
 		screen.setOffset(xScroll, yScroll);//offset based on player
 		int x0 = xScroll >> 4; // divided by 16(size of tile)
-		int x1 =( xScroll+screen.width) >> 4;	
+		int x1 =( xScroll+screen.width+16) >> 4;	//the extra 16 is for the next pixel
 		//y's
 		int y0 = yScroll >> 4; // divided by 16(size of tile)
-		int y1 =( yScroll+screen.height) >> 4;
+		int y1 =( yScroll+screen.height+16) >> 4;
 		
 		for(int row = y0;row<y1;row++)
 		{

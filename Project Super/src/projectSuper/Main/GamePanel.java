@@ -76,7 +76,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 			setFocusable(true);
 			addKeyListener(this);
 			
-			level = new RandomLevel(2000,2000);//random test numbers for map size
+			level = new RandomLevel(64,64);//random test numbers for map size
 			
 		/*	new GamePanel();
 		 */
