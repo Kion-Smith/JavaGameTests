@@ -76,7 +76,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 			setFocusable(true);
 			addKeyListener(this);
 			
-			level = new RandomLevel(1980,1080);//random test numbers for map size
+			level = new RandomLevel(1000,1000);//random test numbers for map size
 			
 		/*	new GamePanel();
 		 */
@@ -226,6 +226,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 		//image = new BufferedImage(WIDTH,HEIGHT,1);
 		gsm = new gameStateManager();
 	}
+	//temp ints
 	int x =0;
 	int y = 0;
 	private void update()
