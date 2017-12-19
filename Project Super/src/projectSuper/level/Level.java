@@ -61,6 +61,11 @@ public class Level
 	
 	public Tile getTile(int locX,int locY)
 	{
+		//out of bounds
+		if(locX <0 || locY <0 || locX>= width || locY>=height)
+		{
+			return Tile.voidTile;
+		}
 		if(tiles[locX+locY*width]==0)// at loc 0,0
 		{
 			return Tile.ground1;
