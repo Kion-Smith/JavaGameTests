@@ -46,6 +46,7 @@ public class Level
 		screen.setOffset(xScroll, yScroll);//offset based on player
 		int x0 = xScroll >> 4; // divided by 16(size of tile)
 		int x1 =( xScroll+screen.width) >> 4;	
+		//y's
 		int y0 = yScroll >> 4; // divided by 16(size of tile)
 		int y1 =( yScroll+screen.height) >> 4;
 		
