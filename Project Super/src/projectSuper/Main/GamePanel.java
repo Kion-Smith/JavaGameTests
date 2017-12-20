@@ -18,6 +18,7 @@ import projectSuper.graphics.Screen;
 import projectSuper.input.keyHandler;
 import projectSuper.level.Level;
 import projectSuper.level.RandomLevel;
+import projectSuper.player.player;
 
 
 
@@ -42,6 +43,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 	private Screen screen;
 	private keyHandler key;
 	private boolean isRunning;
+	player p;
 	
 	private int FPS = 60;
 	//private int targetTime = 10000/FPS;
@@ -72,11 +74,13 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 		
 		
 		
-			requestFocus(true);
-			setFocusable(true);
-			addKeyListener(this);
+		requestFocus(true);
+		setFocusable(true);
+		addKeyListener(this);
 			
-			level = new RandomLevel(64,64);//random test numbers for map size
+		level = new RandomLevel(64,64);//random test numbers for map size
+		
+		p = new player(32,32);
 			
 		/*	new GamePanel();
 		 */
@@ -231,8 +235,10 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 	int y = 0;
 	private void update()
 	{
-		//gsm.update();
+		//gsm.update(); use gsm later when this is all set up
 		keyHandler.update();
+		p.update();
+		/*
 		if(keyHandler.isPressed(keyHandler.UP))
 		{
 			y--;
@@ -249,6 +255,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 		{
 			x++;
 		}
+		*/
 	
 	}
 	
@@ -262,7 +269,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 		}
 		
 		screen.clear();
-		level.render(x, y, screen);
+		level.render(p.x, p.y, screen);
 		
 		for(int i = 0;i<pixels.length;i++)
 		{
