@@ -64,6 +64,15 @@ public class keyHandler
 			}
 			return false;
 		}
+		public static boolean isPressed(int i, int j) 
+		{
+		//	return keyState[i] && !prevKeyState[i];
+			if(keyState[i] && keyState[j])
+			{
+				return true;
+			}
+			return false;
+		}
 		public static boolean anyKeyDown() 
 		{
 			for(int i = 0; i < keys; i++)
