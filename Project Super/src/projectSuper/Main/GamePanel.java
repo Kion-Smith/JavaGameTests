@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import projectSuper.gameStates.gameStateManager;
 import projectSuper.graphics.Screen;
+import projectSuper.graphics.spriteSheet;
 import projectSuper.input.keyHandler;
 import projectSuper.level.Level;
 import projectSuper.level.RandomLevel;
@@ -79,7 +80,8 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 		addKeyListener(this);
 			
 		level = new RandomLevel(64,64);//random test numbers for map size
-		
+
+		//level = new Level();
 		p = new player(32,32);
 			
 		/*	new GamePanel();

@@ -23,7 +23,7 @@ public class player
 	int workpoints;
 	
 	public int x,y;
-	int moveSpeed = 2;
+	int moveSpeed = 3;
 
 	int dir;
 	
@@ -60,15 +60,14 @@ public class player
 	public void render(Screen screen)
 	{
 		
-		screen.renderPlayer(x, y, Sprite.tempPlayer);
+		screen.renderPlayer(x, y, Sprite.tempPlayer2);
+		//screen.renderPlayer(x+1, y, Sprite.tempPlayer2);
+		//screen.renderPlayer(x, y+1, Sprite.tempPlayer3);
+		//screen.renderPlayer(x+1, y+1, Sprite.tempPlayer4);
 	}
 	
 	public void input(int curX,int curY)
 	{
-		if(keyHandler.isPressed(keyHandler.RIGHT))
-		{
-			move(x+moveSpeed,curY-moveSpeed);
-		}
 		if(keyHandler.isPressed(keyHandler.UP))
 		{
 			move(curX,curY-moveSpeed);

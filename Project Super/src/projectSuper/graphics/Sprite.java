@@ -11,14 +11,12 @@ public class Sprite
 	
 	public static Sprite ground1 = new Sprite(16,0,0,spriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16,0x4286f4);//use the hex
-	public static Sprite tempPlayer = new Sprite(16,1,0,spriteSheet.tiles);
 	
-	
-	/*
-	public static Sprite tempPlayer2 = new Sprite(16,0,2,spriteSheet.tiles);
-	public static Sprite tempPlayer3 = new Sprite(16,0,3,spriteSheet.tiles);
-	public static Sprite tempPlayer4= new Sprite(16,0,4,spriteSheet.tiles);
-	*/
+	public static Sprite tempPlayer = new Sprite(16,1,0,spriteSheet.tiles);	
+	public static Sprite tempPlayer2 = new Sprite(16,2,0,spriteSheet.tiles);
+	public static Sprite tempPlayer3 = new Sprite(16,3,0,spriteSheet.tiles);
+	public static Sprite tempPlayer4= new Sprite(16,4,0,spriteSheet.tiles);
+
 	
 	public Sprite(int size,int col,int row,spriteSheet s)
 	{
