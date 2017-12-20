@@ -2,6 +2,8 @@ package projectSuper.player;
 
 import java.awt.image.BufferedImage;
 
+import projectSuper.graphics.Screen;
+import projectSuper.graphics.Sprite;
 import projectSuper.input.keyHandler;
 
 public class player
@@ -12,6 +14,8 @@ public class player
 	boolean isHero;
 	boolean isWalking;
 	boolean isFlying;
+	
+	Sprite sprite;
 
 	
 	int power;
@@ -19,6 +23,7 @@ public class player
 	int workpoints;
 	
 	public int x,y;
+	int moveSpeed = 2;
 
 	int dir;
 	
@@ -48,32 +53,38 @@ public class player
 	{
 		if(isAlive)
 		{
-			input();
+			input(x,y);
 		}
 	}
 	
-	public void render()
+	public void render(Screen screen)
 	{
 		
+		screen.renderPlayer(x, y, Sprite.tempPlayer);
 	}
 	
-	public void input()
+	public void input(int curX,int curY)
 	{
+		if(keyHandler.isPressed(keyHandler.RIGHT))
+		{
+			move(x+moveSpeed,curY-moveSpeed);
+		}
 		if(keyHandler.isPressed(keyHandler.UP))
 		{
-			y--;
+			move(curX,curY-moveSpeed);
+			
 		}
 		if(keyHandler.isPressed(keyHandler.DOWN))
 		{
-			y++;
+			move(curX,curY+moveSpeed);
 		}
 		if(keyHandler.isPressed(keyHandler.LEFT))
 		{
-			x--;
+			move(curX-moveSpeed,curY);
 		}
 		if(keyHandler.isPressed(keyHandler.RIGHT))
 		{
-			x++;
+			move(x+moveSpeed,curY);
 		}
 	}
 	
@@ -98,8 +109,8 @@ public class player
 		
 		if(!collison())
 		{
-			x+= nextX;
-			y+=nextY;
+			x = nextX;
+			y = nextY;
 		}
 	}
 	

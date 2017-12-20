@@ -269,7 +269,13 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 		}
 		
 		screen.clear();
-		level.render(p.x, p.y, screen);
+		
+		int xScroll = p.x - screen.width/2;
+		int yScroll = p.y - screen.height/2;
+		
+		level.render(xScroll, yScroll, screen);
+		p.render(screen);
+		
 		
 		for(int i = 0;i<pixels.length;i++)
 		{
@@ -299,7 +305,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 	public void keyPressed(KeyEvent k) 
 	{
 		keyHandler.keySet(k.getKeyCode(),true);
-		System.out.println("ran");
+		//System.out.println("ran");
 	}
 
 	

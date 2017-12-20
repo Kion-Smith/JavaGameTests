@@ -3,6 +3,7 @@ package projectSuper.graphics;
 import java.util.Random;
 
 import projectSuper.level.tiles.Tile;
+import projectSuper.player.player;
 
 //pixel manipulation class
 public class Screen 
@@ -78,6 +79,35 @@ public class Screen
 					xa =0;
 				}
 				pixels[xa+ya*width] = tile.sprite.pixels[j+i*tile.sprite.SIZE];
+				
+			}
+			
+		}
+	}
+	public void renderPlayer(int xPos, int yPos,Sprite s)
+	{
+		
+		xPos -= xOffset;
+		yPos -= yOffset;
+		for(int i=0;i<16;i++)
+		{
+			int ya = i+yPos;
+			
+			for(int j=0;j<16;j++)
+			{
+				int xa = j+xPos;
+				
+				if(xa<-16 || xa>= width || ya<0 || ya>= height)//prevent using up resources and index out of bounds
+				{
+					break;
+					
+				}
+
+				if(xa< 0)
+				{
+					xa =0;
+				}
+				pixels[xa+ya*width] = s.pixels[j+i*16];
 			}
 			
 		}
