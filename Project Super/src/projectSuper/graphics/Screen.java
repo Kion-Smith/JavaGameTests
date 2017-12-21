@@ -89,15 +89,15 @@ public class Screen
 		
 		xPos -= xOffset;
 		yPos -= yOffset;
-		for(int i=0;i<16;i++)
+		for(int i=0;i<32;i++)
 		{
 			int ya = i+yPos;
 			
-			for(int j=0;j<16;j++)
+			for(int j=0;j<32;j++)
 			{
 				int xa = j+xPos;
 				
-				if(xa<-16 || xa>= width || ya<0 || ya>= height)//prevent using up resources and index out of bounds
+				if(xa<-32 || xa>= width || ya<0 || ya>= height)//prevent using up resources and index out of bounds
 				{
 					break;
 					
@@ -107,7 +107,13 @@ public class Screen
 				{
 					xa =0;
 				}
-				pixels[xa+ya*width] = s.pixels[j+i*16];
+				int col = s.pixels[j+i*32];
+				
+				if(col != 0xE202FFFF)//not sure why this isnt working
+				{
+					pixels[xa+ya*width] = col;
+				}
+				
 			}
 			
 		}

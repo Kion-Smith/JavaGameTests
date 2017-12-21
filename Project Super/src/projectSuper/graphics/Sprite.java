@@ -16,6 +16,8 @@ public class Sprite
 	public static Sprite tempPlayer2 = new Sprite(16,2,0,spriteSheet.tiles);
 	public static Sprite tempPlayer3 = new Sprite(16,3,0,spriteSheet.tiles);
 	public static Sprite tempPlayer4= new Sprite(16,4,0,spriteSheet.tiles);
+	
+	public static Sprite fulltempPlayer = new Sprite(32,4,0,spriteSheet.tiles);
 
 	
 	public Sprite(int size,int col,int row,spriteSheet s)
