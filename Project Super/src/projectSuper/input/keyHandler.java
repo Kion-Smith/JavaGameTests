@@ -73,6 +73,7 @@ public class keyHandler
 			}
 			return false;
 		}
+	
 		public static boolean anyKeyDown() 
 		{
 			for(int i = 0; i < keys; i++)

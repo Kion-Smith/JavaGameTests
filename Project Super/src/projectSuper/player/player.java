@@ -59,7 +59,7 @@ public class player
 	
 	public void render(Screen screen)
 	{
-		int xx =x -16;
+		int xx = x-16;
 		int yy = y-16;
 		screen.renderPlayer(xx, yy, Sprite.tempPlayer);
 		screen.renderPlayer(xx+16, yy, Sprite.tempPlayer2);
@@ -69,22 +69,39 @@ public class player
 	
 	public void input(int curX,int curY)
 	{
-		if(keyHandler.isPressed(keyHandler.UP))
+		if((keyHandler.isPressed(keyHandler.UP,keyHandler.RIGHT)))//up right
+		{
+			move(curX+moveSpeed,curY-moveSpeed);
+		}
+		else if((keyHandler.isPressed(keyHandler.UP,keyHandler.LEFT)))//up left
+		{
+			move(curX-moveSpeed,curY-moveSpeed);
+		}
+		else if((keyHandler.isPressed(keyHandler.DOWN,keyHandler.RIGHT)))// down right
+		{
+			move(curX+moveSpeed,curY+moveSpeed);
+		}
+		else if((keyHandler.isPressed(keyHandler.DOWN,keyHandler.LEFT))) //down left
+		{
+			move(curX-moveSpeed,curY+moveSpeed);
+		}
+		else if(keyHandler.isPressed(keyHandler.UP))
 		{
 			move(curX,curY-moveSpeed);
 		}
-		if(keyHandler.isPressed(keyHandler.DOWN))
+		else if(keyHandler.isPressed(keyHandler.DOWN))
 		{
 			move(curX,curY+moveSpeed);
 		}
-		if(keyHandler.isPressed(keyHandler.LEFT))
+		else if(keyHandler.isPressed(keyHandler.LEFT))
 		{
 			move(curX-moveSpeed,curY);
 		}
-		if(keyHandler.isPressed(keyHandler.RIGHT))
+		else if(keyHandler.isPressed(keyHandler.RIGHT))
 		{
-			move(x+moveSpeed,curY);
-		}
+			move(curX+moveSpeed,curY);
+		}/**/
+		
 	}
 	
 	public void move(int nextX,int nextY)//use this later
@@ -108,8 +125,11 @@ public class player
 		
 		if(!collison())
 		{
+			
 			x = nextX;
 			y = nextY;
+			
+			System.out.println("X is "+x+" Y is "+ y);
 		}
 	}
 	
