@@ -108,10 +108,10 @@ public class Screen
 					xa =0;
 				}
 				int col = s.pixels[j+i*32];
-				
-				if(col != 0xE202FFFF)//not sure why this isnt working
+				if(col != 0xffffff)//only ever worked with white
 				{
 					pixels[xa+ya*width] = col;
+					
 				}
 				
 			}

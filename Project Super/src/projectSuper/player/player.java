@@ -65,7 +65,9 @@ public class player
 		screen.renderPlayer(xx, yy+16, Sprite.tempPlayer3);
 		screen.renderPlayer(xx+16, yy+16, Sprite.tempPlayer4);
 		*/
-		screen.renderPlayer(x-16, y-16, Sprite.fulltempPlayer);
+		screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead);
+		screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBody);
+		screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLeg);
 	}
 	
 	public void input(int curX,int curY)
