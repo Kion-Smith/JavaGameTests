@@ -108,7 +108,7 @@ public class Screen
 					xa =0;
 				}
 				int col = s.pixels[j+i*32];
-				if(col != 0xffffff)//only ever worked with white
+				if(col != 0xffffff)//(only ever worked with white)<- this was a lie, white dosent work either
 				{
 					pixels[xa+ya*width] = col;
 					
