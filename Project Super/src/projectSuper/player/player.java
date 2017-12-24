@@ -12,9 +12,9 @@ public class player
 	//maybe make a abstract parent for mobs/entities?
 	boolean isAlive;
 	boolean isHero;
-	boolean isWalking;
-	boolean isFlying;
-	boolean isFalling;
+	boolean isWalking = false;
+	boolean isFlying = false;
+	boolean isFalling = false;
 	
 	boolean isLeft;
 	boolean isRight;
@@ -59,6 +59,10 @@ public class player
 		if(isAlive)
 		{
 			input(x,y);
+			if(isFalling)
+			{
+				y++;
+			}
 		}
 	}
 	
@@ -71,28 +75,6 @@ public class player
 		screen.renderPlayer(xx+16, yy+16, Sprite.tempPlayer4);
 		*/
 		
-		if(!isFlying && isFalling)
-		{
-			if(isRight && !isLeft)
-			{
-				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,false,32);
-				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerFallingBody,false,32);
-				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerFallingLeg,false,32);
-			}
-			else if(isLeft && !isRight)
-			{
-				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,true,32);
-				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerFallingBody,true,32);
-				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerFallingLeg,true,32);
-			}
-			else
-			{
-				isRight = true;
-				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,false,32);
-				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerFallingBody,false,32);
-				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerFallingLeg,false,32);
-			}
-		}
 		if(!isFlying && !isFalling)
 		{
 			if(isRight && !isLeft)
@@ -114,11 +96,31 @@ public class player
 				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBody,false,32);
 				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLeg,false,32);
 			}
+			
+			isWalking= true;
+		}
+		else if(!isFlying && isFalling)
+		{
+			isWalking = false;
+			if(isRight && !isLeft)
+			{
+				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,false,32);
+				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerFallingBody,false,32);
+				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerFallingLeg,false,32);
+			}
+			else if(isLeft && !isRight)
+			{
+				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,true,32);
+				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerFallingBody,true,32);
+				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerFallingLeg,true,32);
+			}
+			
+			
 		}
 		else if(isFlying)
 		{
 			
-		
+			isWalking = false;
 			
 			if(isRight && !isLeft)
 			{
@@ -132,13 +134,7 @@ public class player
 				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerFlyingBody,true,32);
 				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerFlyingLeg,true,32);
 			}
-			else
-			{
-				isRight = true;
-				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,false,32);
-				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerFlyingBody,false,32);
-				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerFlyingLeg,false,32);
-			}
+			
 			
 		}
 
@@ -202,7 +198,7 @@ public class player
 				isFlying = true;
 				isFalling= false;
 			}
-			else
+			else if(nextY>y)
 			{
 				
 				isFalling =true;

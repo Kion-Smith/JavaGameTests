@@ -82,7 +82,7 @@ public class GamePanel extends JPanel implements KeyListener, MouseListener, Run
 		level = new RandomLevel(64,64);//random test numbers for map size
 
 		//level = new Level();
-		p = new player(32,32);
+		p = new player(400,-100);
 			
 		/*	new GamePanel();
 		 */
