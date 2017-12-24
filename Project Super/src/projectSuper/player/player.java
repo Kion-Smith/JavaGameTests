@@ -61,7 +61,7 @@ public class player
 			input(x,y);
 			if(isFalling)
 			{
-				y++;
+				y +=moveSpeed+2;
 			}
 		}
 	}
