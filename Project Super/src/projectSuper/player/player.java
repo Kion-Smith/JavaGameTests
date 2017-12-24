@@ -15,6 +15,9 @@ public class player
 	boolean isWalking;
 	boolean isFlying;
 	
+	boolean isLeft;
+	boolean isRight;
+	
 	Sprite sprite;
 
 	
@@ -65,9 +68,27 @@ public class player
 		screen.renderPlayer(xx, yy+16, Sprite.tempPlayer3);
 		screen.renderPlayer(xx+16, yy+16, Sprite.tempPlayer4);
 		*/
-		screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead);
-		screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBody);
-		screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLeg);
+		
+		if(isRight && !isLeft)
+		{
+			screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHeadR,false);
+			screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBodyR,false);
+			screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLegR,false);
+		}
+		else if(isLeft && !isRight)
+		{
+			screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHeadL,true);
+			screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBodyL,true);
+			screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLegL,true);
+		}
+		else
+		{
+			isRight = true;
+			screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHeadR,false);
+			screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBodyR,false);
+			screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLegR,false);
+		}
+		System.out.println(isRight);
 	}
 	
 	public void input(int curX,int curY)
@@ -109,25 +130,19 @@ public class player
 	
 	public void move(int nextX,int nextY)//use this later
 	{
-		if(nextX>0)
-		{
-			dir=1;
-		}
-		if(nextX<0)
-		{
-			dir=3;
-		}
-		if(nextY>0)
-		{
-			dir=2;
-		}
-		if(nextY>0)
-		{
-			dir=0;
-		}
 		
 		if(!collison())
 		{
+			if(nextX>x)
+			{
+				isRight = true;
+				isLeft = false;
+			}
+			else if(nextX<x)
+			{
+				isLeft = true;
+				isRight = false;
+			}
 			
 			x = nextX;
 			y = nextY;

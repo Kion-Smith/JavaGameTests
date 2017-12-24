@@ -84,7 +84,7 @@ public class Screen
 			
 		}
 	}
-	public void renderPlayer(int xPos, int yPos,Sprite s)
+	public void renderPlayer(int xPos, int yPos,Sprite s,boolean flip)
 	{
 		
 		xPos -= xOffset;
@@ -92,11 +92,19 @@ public class Screen
 		for(int i=0;i<32;i++)
 		{
 			int ya = i+yPos;
-			
+			int ys = i;
 			for(int j=0;j<32;j++)
 			{
 				int xa = j+xPos;
-				
+				int xs;
+				if(flip != true)
+				{
+					xs = j;
+				}
+				else
+				{
+					xs =31-j;
+				}
 				if(xa<-32 || xa>= width || ya<0 || ya>= height)//prevent using up resources and index out of bounds
 				{
 					break;
@@ -107,8 +115,8 @@ public class Screen
 				{
 					xa =0;
 				}
-				int col = s.pixels[j+i*32];
-				if(col != 0xffffff)//(only ever worked with white)<- this was a lie, white dosent work either
+				int col = s.pixels[xs+ys*32];
+				if(col != 0xffffff)// only works to get rid or png transperent background even though it should work with every color
 				{
 					pixels[xa+ya*width] = col;
 					
