@@ -84,16 +84,16 @@ public class Screen
 			
 		}
 	}
-	public void renderPlayer(int xPos, int yPos,Sprite s,boolean flip)
+	public void renderPlayer(int xPos, int yPos,Sprite s,boolean flip,int size)
 	{
 		
 		xPos -= xOffset;
 		yPos -= yOffset;
-		for(int i=0;i<32;i++)
+		for(int i=0;i<size;i++)
 		{
 			int ya = i+yPos;
 			int ys = i;
-			for(int j=0;j<32;j++)
+			for(int j=0;j<size;j++)
 			{
 				int xa = j+xPos;
 				int xs;
@@ -115,7 +115,7 @@ public class Screen
 				{
 					xa =0;
 				}
-				int col = s.pixels[xs+ys*32];
+				int col = s.pixels[xs+ys*size];
 				if(col != 0xffffff)// only works to get rid or png transperent background even though it should work with every color
 				{
 					pixels[xa+ya*width] = col;

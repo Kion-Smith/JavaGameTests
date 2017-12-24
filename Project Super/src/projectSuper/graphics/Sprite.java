@@ -12,6 +12,7 @@ public class Sprite
 	public static Sprite ground1 = new Sprite(16,0,0,spriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16,0x4286f4);//use the hex
 	
+	public static Sprite temp = new Sprite(16,4,0,spriteSheet.tiles);
 	
 	public static Sprite tempPlayerHeadR = new Sprite(32,4,0,spriteSheet.tiles);
 	public static Sprite tempPlayerBodyR = new Sprite(32,4,1,spriteSheet.tiles);
