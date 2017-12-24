@@ -14,13 +14,16 @@ public class Sprite
 	
 	public static Sprite temp = new Sprite(16,4,0,spriteSheet.tiles);
 	
-	public static Sprite tempPlayerHeadR = new Sprite(32,4,0,spriteSheet.tiles);
-	public static Sprite tempPlayerBodyR = new Sprite(32,4,1,spriteSheet.tiles);
-	public static Sprite tempPlayerLegR = new Sprite(32,4,2,spriteSheet.tiles);
+	public static Sprite tempPlayerHead = new Sprite(32,4,0,spriteSheet.tiles);
+	public static Sprite tempPlayerBody = new Sprite(32,4,1,spriteSheet.tiles);
+	public static Sprite tempPlayerLeg = new Sprite(32,4,2,spriteSheet.tiles);
 	
-	public static Sprite tempPlayerHeadL = new Sprite(32,4,0,spriteSheet.tiles);
-	public static Sprite tempPlayerBodyL = new Sprite(32,4,1,spriteSheet.tiles);
-	public static Sprite tempPlayerLegL = new Sprite(32,4,2,spriteSheet.tiles);
+	public static Sprite tempPlayerFlyingBody = new Sprite(32,5,1,spriteSheet.tiles);
+	public static Sprite tempPlayerFlyingLeg = new Sprite(32,5,2,spriteSheet.tiles);
+	
+	public static Sprite tempPlayerFallingBody = new Sprite(32,6,1,spriteSheet.tiles);
+	public static Sprite tempPlayerFallingLeg = new Sprite(32,6,2,spriteSheet.tiles);
+
 
 	
 	public Sprite(int size,int col,int row,spriteSheet s)

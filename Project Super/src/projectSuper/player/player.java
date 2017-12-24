@@ -14,6 +14,7 @@ public class player
 	boolean isHero;
 	boolean isWalking;
 	boolean isFlying;
+	boolean isFalling;
 	
 	boolean isLeft;
 	boolean isRight;
@@ -50,6 +51,7 @@ public class player
 		x=curX;
 		y=curY;
 		isAlive =  true;
+		isFlying = false;
 	}
 	
 	public void update()
@@ -68,26 +70,78 @@ public class player
 		screen.renderPlayer(xx, yy+16, Sprite.tempPlayer3);
 		screen.renderPlayer(xx+16, yy+16, Sprite.tempPlayer4);
 		*/
-		if(isRight && !isLeft)
+		
+		if(!isFlying && isFalling)
 		{
-			screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHeadR,false,32);
-			screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBodyR,false,32);
-			screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLegR,false,32);
+			if(isRight && !isLeft)
+			{
+				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,false,32);
+				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerFallingBody,false,32);
+				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerFallingLeg,false,32);
+			}
+			else if(isLeft && !isRight)
+			{
+				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,true,32);
+				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerFallingBody,true,32);
+				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerFallingLeg,true,32);
+			}
+			else
+			{
+				isRight = true;
+				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,false,32);
+				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerFallingBody,false,32);
+				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerFallingLeg,false,32);
+			}
 		}
-		else if(isLeft && !isRight)
+		if(!isFlying && !isFalling)
 		{
-			screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHeadL,true,32);
-			screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBodyL,true,32);
-			screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLegL,true,32);
+			if(isRight && !isLeft)
+			{
+				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,false,32);
+				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBody,false,32);
+				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLeg,false,32);
+			}
+			else if(isLeft && !isRight)
+			{
+				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,true,32);
+				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBody,true,32);
+				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLeg,true,32);
+			}
+			else
+			{
+				isRight = true;
+				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,false,32);
+				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBody,false,32);
+				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLeg,false,32);
+			}
 		}
-		else
+		else if(isFlying)
 		{
-			isRight = true;
-			screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHeadR,false,32);
-			screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBodyR,false,32);
-			screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLegR,false,32);
+			
+		
+			
+			if(isRight && !isLeft)
+			{
+				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,false,32);
+				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerFlyingBody,false,32);
+				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerFlyingLeg,false,32);
+			}
+			else if(isLeft && !isRight)
+			{
+				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,true,32);
+				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerFlyingBody,true,32);
+				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerFlyingLeg,true,32);
+			}
+			else
+			{
+				isRight = true;
+				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,false,32);
+				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerFlyingBody,false,32);
+				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerFlyingLeg,false,32);
+			}
+			
 		}
-		System.out.println(isRight);
+
 	}
 	
 	public void input(int curX,int curY)
@@ -141,6 +195,19 @@ public class player
 			{
 				isLeft = true;
 				isRight = false;
+			}
+			
+			if(nextY<y)
+			{
+				isFlying = true;
+				isFalling= false;
+			}
+			else
+			{
+				
+				isFalling =true;
+				isFlying = false;
+				
 			}
 			
 			x = nextX;
