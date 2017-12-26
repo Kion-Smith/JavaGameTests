@@ -59,9 +59,14 @@ public class player
 		if(isAlive)
 		{
 			input(x,y);
-			if(isFalling)
+			if((x-340)*y+1280 <= 0)
 			{
 				y +=moveSpeed+2;
+			}
+		
+			else 
+			{
+				isFalling = false;
 			}
 		}
 	}
@@ -100,6 +105,11 @@ public class player
 		}
 		else if(!isFlying && isFalling)
 		{
+			/*
+			if(Screen.tiles[x*y+1280] == 0)
+			{
+				isFalling = false;
+			}*/
 			isWalking = false;
 			if(isRight && !isLeft)
 			{
@@ -118,7 +128,7 @@ public class player
 		}
 		else if(isFlying)
 		{
-			
+		
 			isWalking = false;
 			
 			if(isRight && !isLeft)

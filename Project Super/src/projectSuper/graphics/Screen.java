@@ -10,9 +10,9 @@ public class Screen
 {
 	public int width,height; //size of screen
 	public int[] pixels; //array for pixels on screen, single array because its faster than using a 2d array
-	public final int MAPSIZE = 64;
+	public static final int MAPSIZE = 64;
 	public final int MAPSIZEMASK = MAPSIZE-1;
-	public int[] tiles = new int[MAPSIZE*MAPSIZE];
+	public static int[]  tiles = new int[MAPSIZE*MAPSIZE];
 	private Random random = new Random();
 	
 	public int xOffset,yOffset;
