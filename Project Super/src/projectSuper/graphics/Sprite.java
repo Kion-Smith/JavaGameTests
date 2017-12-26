@@ -23,6 +23,8 @@ public class Sprite
 	
 	public static Sprite tempPlayerFallingBody = new Sprite(32,6,1,spriteSheet.tiles);
 	public static Sprite tempPlayerFallingLeg = new Sprite(32,6,2,spriteSheet.tiles);
+	
+	public static Sprite tempPlayerWalkingLeg = new Sprite(32,4,3,spriteSheet.tiles);
 
 
 	

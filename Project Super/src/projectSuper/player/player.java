@@ -75,29 +75,28 @@ public class player
 		screen.renderPlayer(xx+16, yy+16, Sprite.tempPlayer4);
 		*/
 		
-		if(!isFlying && !isFalling)
+		if(!isFlying && !isFalling && isWalking)
 		{
+			//isWalking = true;
 			if(isRight && !isLeft)
 			{
 				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,false,32);
 				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBody,false,32);
-				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLeg,false,32);
+				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerWalkingLeg,false,32);
+				
+				
 			}
 			else if(isLeft && !isRight)
 			{
 				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,true,32);
 				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBody,true,32);
-				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLeg,true,32);
-			}
-			else
-			{
-				isRight = true;
-				screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,false,32);
-				screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBody,false,32);
-				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLeg,false,32);
+				screen.renderPlayer(x-16, y+48, Sprite.tempPlayerWalkingLeg,true,32);
+				
 			}
 			
-			isWalking= true;
+			
+		
+			
 		}
 		else if(!isFlying && isFalling)
 		{
@@ -136,6 +135,13 @@ public class player
 			}
 			
 			
+		}
+		else
+		{
+			isRight = true;
+			screen.renderPlayer(x-16, y-16, Sprite.tempPlayerHead,false,32);
+			screen.renderPlayer(x-16, y+16, Sprite.tempPlayerBody,false,32);
+			screen.renderPlayer(x-16, y+48, Sprite.tempPlayerLeg,false,32);
 		}
 
 	}
@@ -204,6 +210,10 @@ public class player
 				isFalling =true;
 				isFlying = false;
 				
+			}
+			else
+			{
+				isWalking = true;
 			}
 			
 			x = nextX;
